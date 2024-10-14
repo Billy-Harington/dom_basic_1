@@ -13,24 +13,43 @@
 //         // img.setAttribute('src', pictures[btn.getAttribute('data-color')])
 //     }
 // })
+const img = document.querySelector('.img');
+const btnsColor = document.querySelectorAll('button[data-color]');
+const btnsStorage = document.querySelectorAll('button[data-storage]');
+const info = document.querySelector('.info');
 
-const img = document.querySelector('.img')
-const btns = document.querySelectorAll('button[data-color]')
-const info = document.querySelector(".info")
+let currentColor = 'white';
+let currentPrice = 1999; 
+
+
 const picture = {
     grey: './grey.png',
     white: './white.png'
-}
-console.log(picture)
+};
 
-btns.forEach((btn) => {
+
+btnsColor.forEach((btn) => {
     btn.onclick = () => {
-        img.style.backgroundImage = `url(${picture[btn.getAttribute('data-color')]})`
-        const color = btn.getAttribute('data-color');
-        if (color === 'grey') {
-            info.innerHTML = "<h1>Macbook Pro</h1><h3>Space Grey</h3><h2>$2,599</h2>";
-        } else if (color === 'white') {
-            info.innerHTML = "<h1>Macbook Pro</h1><h3>White</h3><h2>$1,999</h2>";
+        currentColor = btn.getAttribute('data-color');
+        img.style.backgroundImage = `url(${picture[currentColor]})`;
+
+       
+        if (currentColor === 'grey') {
+            info.innerHTML = `<h1>Macbook Pro</h1><h3>Space Grey</h3><h2>$${currentPrice}</h2>`;
+        } else if (currentColor === 'white') {
+            info.innerHTML = `<h1>Macbook Pro</h1><h3>White</h3><h2>$${currentPrice}</h2>`;
         }
-    }
-})
+    };
+});
+
+btnsStorage.forEach((btn) => {
+    btn.onclick = () => {
+        currentPrice = btn.getAttribute('data-price'); 
+    
+        if (currentColor === 'grey') {
+            info.innerHTML = `<h1>Macbook Pro</h1><h3>Space Grey</h3><h2>$${currentPrice}</h2>`;
+        } else if (currentColor === 'white') {
+            info.innerHTML = `<h1>Macbook Pro</h1><h3>White</h3><h2>$${currentPrice}</h2>`;
+        }
+    };
+});
